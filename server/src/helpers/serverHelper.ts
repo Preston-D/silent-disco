@@ -1,5 +1,6 @@
 import express from 'express'
 
+// https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 export const debugLogger = function (req: express.Request, res: express.Response, next: express.NextFunction) {
     console.log('\x1b[32mINCOMING REQUEST ------------------------------\x1b[0m')
     console.log('\x1b[32mREQUEST URL: \x1b[0m', req.url)
