@@ -2,16 +2,36 @@ import 'dotenv/config'
 
 import express from 'express'
 const app = express()
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
-mongoose.connect(process.env.DATABASE_URL);
-const db = mongoose.connection;
-db.on('error', (error) => console.error(error));
-db.once('open', () => console.log('Connnected to Database'));
+// Mongoose Setup
+if(process.env.DATABASE_URL != null){
+  mongoose.connect(process.env.DATABASE_URL)
+} else {
+  console.log('Error fetching database URL')
+}
 
-app.use(express.json());
+const db = mongoose.connection
+db.on('error', (error) => console.error(error))
+db.once('open', () => console.log('Connnected to Database'))
+// This should be set in production
+// mongoose.set('autoIndex', false);
 
-import usersRouter from './routes/users';
+// Express Setup
+app.use(express.json())
+import {debugLogger} from './helpers/serverHelper.js'
+app.use(debugLogger)
+
+// Routes
+import usersRouter from './routes/users.js'
 app.use('/users', usersRouter)
 
-app.listen(3000,() => console.log('Server Started'));
+
+app.listen(3000,() => console.log('Server Started'))
+
+// Home Routes '/'
+app.get('/', (req, res, next) => {
+
+    res.send('Hello World!')
+    next()
+  })
