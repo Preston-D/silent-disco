@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Register: React.FC = () => {
+const RegisterPage: React.FC = () => {
   return (
     <>
       <h1>Register Page</h1>
@@ -36,4 +36,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;
