@@ -27,3 +27,4 @@ dist-ssr
 # Server
 server/package-lock.json
 .env
+*.rest

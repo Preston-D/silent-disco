@@ -5,7 +5,12 @@ const app = express()
 import mongoose from 'mongoose'
 
 // Mongoose Setup
-mongoose.connect(process.env.DATABASE_URL)
+if(process.env.DATABASE_URL != null){
+  mongoose.connect(process.env.DATABASE_URL)
+} else {
+  console.log('Error fetching database URL')
+}
+
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connnected to Database'))
@@ -14,11 +19,11 @@ db.once('open', () => console.log('Connnected to Database'))
 
 // Express Setup
 app.use(express.json())
-import {debugLogger} from './serverHelper'
+import {debugLogger} from './helpers/serverHelper.js'
 app.use(debugLogger)
 
 // Routes
-import usersRouter from './routes/users'
+import usersRouter from './routes/users.js'
 app.use('/users', usersRouter)
 
 
@@ -26,7 +31,7 @@ app.listen(3000,() => console.log('Server Started'))
 
 // Home Routes '/'
 app.get('/', (req, res, next) => {
-    req.
+
     res.send('Hello World!')
     next()
   })
