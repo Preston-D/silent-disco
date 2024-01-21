@@ -4,10 +4,10 @@ const LoginPage: React.FC = () => {
   return (
     <>
       <h1>Login Page</h1>
-      <form action="">
-        <label htmlFor="username">Username:</label>
+      <form action="http://localhost:3000/login" method="POST">
+        <label htmlFor="email">Email:</label>
         <br />
-        <input type="text" id="username" name="username" />
+        <input type="email" id="email" name="email" />
         <br />
         <label htmlFor="password">Password:</label>
         <br />

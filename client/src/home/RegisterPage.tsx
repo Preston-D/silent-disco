@@ -4,7 +4,7 @@ const RegisterPage: React.FC = () => {
   return (
     <>
       <h1>Register Page</h1>
-      <form action="">
+      <form action="http://localhost:3000/register" method="POST">
         <label htmlFor="firstName">First Name:</label>
         <br />
         <input type="text" id="firstName" name="firstName" />
@@ -16,10 +16,6 @@ const RegisterPage: React.FC = () => {
         <label htmlFor="lastName">Email:</label>
         <br />
         <input type="email" id="email" name="email" />
-        <br />
-        <label htmlFor="username">Username:</label>
-        <br />
-        <input type="text" id="username" name="username" />
         <br />
         <label htmlFor="password">Password:</label>
         <br />
