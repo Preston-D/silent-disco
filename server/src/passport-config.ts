@@ -11,20 +11,15 @@ function initializePassport(passport: passport.PassportStatic) {
     password: string,
     done: passport.DoneCallback
   ) => {
-    console.log("attempting to authenticate", email);
     const user = await User.findOne({ email: email }).exec();
-    console.log(user);
     if (user == null) {
-      console.log("cannot find user", email);
       return done(null, false);
     }
     try {
-      console.log("found user", user);
       if (await bcrypt.compare(password, user.password)) {
-        console.log("password was correct");
+        console.log(`User ${user.email} logged in.`);
         return done(null, user);
       } else {
-        console.log("password was incorrect");
         done(null, false);
       }
     } catch (error) {

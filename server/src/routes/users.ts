@@ -24,28 +24,37 @@ router.get("/", async (req, res) => {
   }
 });
 // Get User
-router.get("/:id", getUser, (req, res: any) => {
-  res.send(res.user);
-});
+router.get("/:id", getUser, async (req, res: any) => {
+  interface IUserPacket {
+    id?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    createdAt?: Date;
+    isCurrentSessionUser?: boolean;
+  }
+  const requestUser: any = req.user; // Who is logged in
+  const responseUser = res.user; // Who is request id related to
 
-// Create a User
-// router.post('/', async (req, res) => {
-//     const user = new User({
-//         'firstName': req.body.firstName,
-//         'lastName': req.body.lastName,
-//         'email': req.body.email
-//     })
-//     try {
-//         const newUser = await user.save()
-//         res.status(201).json(newUser)
-//     } catch (error) {
-//         if (error instanceof Error) {
-//             res.status(400).json({'message': error.message})
-//         } else {
-//             res.status(400).json({'message': error})
-//         }
-//     }
-// })
+  const userPacket: IUserPacket = {};
+  // const responseUser: User = res.user;
+
+  userPacket.id = responseUser._id.toString();
+  userPacket.firstName = responseUser.firstName;
+  userPacket.lastName = responseUser.lastName;
+  userPacket.email = responseUser.email;
+  userPacket.createdAt = responseUser.createdAt;
+  // userPacket.isCurrentSessionUser =
+  // requestUser != null && requestId === user._id.toString();
+  if (requestUser != null) {
+    userPacket.isCurrentSessionUser =
+      requestUser._id.toString() === responseUser._id.toString();
+  } else {
+    userPacket.isCurrentSessionUser = false;
+  }
+
+  res.send(userPacket);
+});
 
 // Update a User
 // TODO: Update

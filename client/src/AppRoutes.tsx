@@ -6,8 +6,8 @@ import RegisterPage from "./home/RegisterPage";
 import ErrorPage from "./home/ErrorPage";
 
 //USER
-import UsersPage from "./user/UsersPage";
-import UserPage from "./user/UserPage";
+import UsersPage from "./users/UsersPage";
+import UserPage from "./users/UserPage";
 
 // https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
@@ -28,11 +28,11 @@ const router = createBrowserRouter([
 
   // USER
   {
-    path: "/user",
+    path: "/users",
     element: <UsersPage />,
   },
   {
-    path: "/user/:id",
+    path: "/users/:id",
     element: <UserPage />,
   },
 ]);

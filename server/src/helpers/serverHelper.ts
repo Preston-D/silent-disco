@@ -7,6 +7,9 @@ export function debugLogger(
   next: express.NextFunction
 ) {
   console.log("\x1b[32mINCOMING REQUEST ------------------------------\x1b[0m");
+  if (req.user != null) {
+    console.log("\x1b[33mAUTHENTICATED: \x1b[0m", (req.user as any).email);
+  }
   console.log("\x1b[32mREQUEST URL: \x1b[0m", req.url);
   console.log("\x1b[32mREQUEST ACTION: \x1b[0m", req.method);
   //   console.log("\x1b[32mREQUEST BODY: \x1b[0m", req.body);

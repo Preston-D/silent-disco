@@ -25,8 +25,6 @@ db.once("open", () => console.log("Connnected to Database"));
 
 // Express Setup
 app.use(express.json());
-import { debugLogger } from "./helpers/serverHelper.js";
-app.use(debugLogger);
 app.use(express.urlencoded({ extended: false }));
 
 // CORS Setup
@@ -54,12 +52,16 @@ if (process.env.SESSION_SECRET != undefined) {
 app.use(passport.session());
 initializePassport(passport);
 
-// Routes
-import homeRouter from "./routes/home.js";
-app.use("/", homeRouter);
+// Debugger, this should be the last app.use(), excluding routers.
+import { debugLogger } from "./helpers/serverHelper.js";
+app.use(debugLogger);
 
+// Routes
 import usersRouter from "./routes/users.js";
 app.use("/users", usersRouter);
+
+import homeRouter from "./routes/home.js";
+app.use("/", homeRouter);
 
 // Start Server
 app.listen(3000, () => console.log("Server Started"));

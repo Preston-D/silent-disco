@@ -45,9 +45,19 @@ router.post("/register", checkNotAuthenticated, async (req, res) => {
 });
 
 // Myaccount
-router.get("/myaccount", checkAuthenticated, (req, res, next) => {
-  res.send("Hello world");
-  next();
+// router.get("/myaccount", checkAuthenticated, (req, res, next) => {
+//   res.send("Hello world");
+//   next();
+// });
+
+// Logout
+router.post("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("http://localhost:5173/");
+  });
 });
 
 export default router;
